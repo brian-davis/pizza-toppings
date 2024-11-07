@@ -1,3 +1,5 @@
+User.delete_all
+
 User.create({
   email: "chef1@example.com",
   password: "chef1_password",

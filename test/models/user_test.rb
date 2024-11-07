@@ -8,7 +8,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "user role queries" do
-    assert users(:one).role_chef?
-    assert users(:two).role_owner?
+    assert users(:chef).role_chef?
+    assert users(:owner).role_owner?
   end
 end
