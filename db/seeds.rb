@@ -25,3 +25,11 @@ Topping.find_or_create_by({
 Topping.find_or_create_by({
   name: "Olives"
 })
+
+Pizza.find_or_create_by({
+  name: "Margherita"
+})
+
+Pizza.find_or_create_by({
+  name: "Napoletana"
+})

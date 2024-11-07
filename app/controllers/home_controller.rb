@@ -14,9 +14,9 @@ class HomeController < ApplicationController
   def set_dashboard_items
     @dashboard_items = case current_user.role
     when "owner"
-      Topping.all
+      Topping.all # TODO: scope to user
     when "chef"
-      # TODO: pizzas
+      Pizza.all # TODO: scope to user
     end
   end
 end
