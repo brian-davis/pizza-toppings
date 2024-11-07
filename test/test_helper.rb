@@ -13,3 +13,10 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
   end
 end
+
+# https://github.com/heartcombo/devise?tab=readme-ov-file#integration-tests
+module ActionDispatch
+  class IntegrationTest
+    include Devise::Test::IntegrationHelpers
+  end
+end
