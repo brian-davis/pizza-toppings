@@ -1,5 +1,6 @@
 class PizzasController < ApplicationController
   before_action :set_pizza, only: %i[ show edit update destroy ]
+  before_action :set_toppings, only: [:new, :edit]
 
   # GET /pizzas or /pizzas.json
   # REFACTOR: This is currently handled by home#index
@@ -69,4 +70,9 @@ class PizzasController < ApplicationController
     def pizza_params
       params.require(:pizza).permit(:name)
     end
+
+    def set_toppings
+      @toppings = current_user.manager.toppings.pluck(:name, :id)
+    end
+
 end

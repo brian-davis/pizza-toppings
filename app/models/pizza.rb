@@ -4,6 +4,9 @@ class Pizza < ApplicationRecord
 
   belongs_to :chef, class_name: "User", foreign_key: :chef_id
 
+  has_many :pizza_toppings, dependent: :destroy
+  has_many :toppings, through: :pizza_toppings
+
   private
 
   def chef_role

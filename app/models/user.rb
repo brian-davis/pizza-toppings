@@ -10,6 +10,6 @@ class User < ApplicationRecord
   # https://guides.rubyonrails.org/association_basics.html#single-table-inheritance-sti
   enum :role, [:owner, :chef], prefix: true
 
-  has_many :pizzas, inverse_of: :chef, foreign_key: :chef_id
-  has_many :toppings, inverse_of: :owner, foreign_key: :owner_id
+  has_many :pizzas, inverse_of: :chef, foreign_key: :chef_id, dependent: :destroy
+  has_many :toppings, inverse_of: :owner, foreign_key: :owner_id, dependent: :destroy
 end

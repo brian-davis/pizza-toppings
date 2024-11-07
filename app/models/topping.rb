@@ -4,6 +4,9 @@ class Topping < ApplicationRecord
 
   belongs_to :owner, class_name: "User", foreign_key: :owner_id
 
+  has_many :pizza_toppings, dependent: :destroy
+  has_many :pizzas, through: :pizza_toppings
+
   private
 
   def owner_role
