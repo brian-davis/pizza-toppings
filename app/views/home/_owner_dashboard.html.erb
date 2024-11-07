@@ -1,0 +1,9 @@
+<h2 class="dashboard-items-header">
+  Pizza Toppings
+</h2>
+
+<div class="dashboard-items-list">
+  <% @dashboard_items.each do |item| %>
+    <%= render(item) %>
+  <% end %>
+</div>
