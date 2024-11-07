@@ -2,21 +2,60 @@ require "test_helper"
 
 class PizzaTest < ActiveSupport::TestCase
   test "pizza name string is required" do
-    pizza1 = Pizza.create({ name: "Special" })
+    pizza1 = Pizza.new({ name: "Special", chef: users(:chef1) })
     assert pizza1.valid?
 
     pizza2 = Pizza.new()
     refute pizza2.valid?
-    expected = "Name can't be blank"
+
+    expected = "Name can't be blank".downcase
     result = pizza2.errors.full_messages.to_sentence
-    assert_equal expected, result
+    assert result.downcase.match?(Regexp.new(expected))
   end
 
-  test "pizza name must be unique" do
-    pizza = Pizza.new({ name: pizzas(:one).name }) # Margherita
-    refute pizza.valid?
-    expected = "Name has already been taken"
-    result = pizza.errors.full_messages.to_sentence
-    assert_equal expected, result
+  test "pizza chef user is required" do
+    pizza1 = Pizza.new({ name: "Special" })
+    refute pizza1.valid?
+
+    expected = "Chef must exist".downcase
+    result = pizza1.errors.full_messages.to_sentence
+    assert result.downcase.match?(Regexp.new(expected))
+
+    pizza1.chef = users(:chef1)
+    assert pizza1.valid?
+  end
+
+  test "pizza name must be unique, scoped to chef user" do
+    pizza1 = Pizza.new({
+      name: pizzas(:pizza1).name,
+      chef: users(:chef1)
+    })
+    refute pizza1.valid?
+
+    expected = "Name has already been taken".downcase
+    result = pizza1.errors.full_messages.to_sentence
+    assert result.downcase.match?(Regexp.new(expected))
+
+    pizza2 = Pizza.new({
+      name: pizzas(:pizza1).name,
+      chef: users(:chef2)
+    })
+    assert pizza2.valid?
+  end
+
+  test "pizza belongs_to chef" do
+    c1 = users(:chef1)
+    p1 = pizzas(:pizza1)
+    assert_equal c1, p1.chef
+    assert p1.in?(c1.pizzas)
+  end
+
+  test "pizza validates chef role" do
+    u1 = users(:owner1)
+    p1 = Pizza.new({
+      name: "Special 2",
+      chef: u1
+    })
+    refute p1.valid?
   end
 end

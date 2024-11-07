@@ -1,7 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+pizza1:
   name: Margherita
+  chef: chef1
 
-two:
+pizza2:
   name: Napoletana
+  chef: chef1
+
+pizza3:
+  name: Chicago Style
+  chef: chef2

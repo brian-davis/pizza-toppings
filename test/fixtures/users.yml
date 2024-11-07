@@ -1,13 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-chef:
-  email: test1@example.com
-  # password: password1
-  # password_confirmation: password1
-  role: :chef
+owner1:
+  email: owner1@example.com
+  role: owner
 
-owner:
-  email: test2@example.com
-  # password: password2
-  # password_confirmation: password2
-  role: :owner
+owner2:
+  email: owner2@example.com
+  role: owner
+
+chef1:
+  email: chef11@example.com
+  role: chef
+  manager: owner1
+
+chef2:
+  email: chef2@example.com
+  role: chef
