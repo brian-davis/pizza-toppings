@@ -1,0 +1,11 @@
+<% content_for :title, "New topping" %>
+
+<h1>New topping</h1>
+
+<%= render "form", topping: @topping %>
+
+<br>
+
+<div>
+  <%= link_to "Back to toppings", toppings_path %>
+</div>

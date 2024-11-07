@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :toppings
   resources :pizzas
   devise_for :users, skip: [:registrations, :recoverable]
 
@@ -17,4 +18,5 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :pizza
+  resources :topping
 end

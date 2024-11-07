@@ -1,0 +1,24 @@
+<%= form_with(model: topping) do |form| %>
+  <% if topping.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(topping.errors.count, "error") %> prohibited this topping from being saved:</h2>
+
+      <ul>
+        <% topping.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <div class="form-fields">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="submit-button-wrapper">
+      <%= form.submit %>
+    </div>
+  </div>
+<% end %>

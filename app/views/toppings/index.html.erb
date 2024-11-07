@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Toppings" %>
+
+<h1>Toppings</h1>
+
+<div id="toppings">
+  <% @toppings.each do |topping| %>
+    <%= render topping %>
+    <p>
+      <%= link_to "Show this topping", topping %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New topping", new_topping_path %>

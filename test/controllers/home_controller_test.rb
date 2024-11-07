@@ -70,7 +70,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     expected_item1 = toppings(:topping1) # build fixture
     expected_item2 = toppings(:topping2) # build fixture
 
-    assert_select "h2.dashboard-items-header", "Pizza Toppings"
+    assert_select "h2.dashboard-items-header", "Toppings"
     assert_select "div.dashboard-items-list"
     assert_select "div.topping#topping_#{expected_item1.id}", "Pepperoni"
     assert_select "div.topping#topping_#{expected_item2.id}", "Sausage"
