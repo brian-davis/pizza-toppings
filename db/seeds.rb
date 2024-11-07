@@ -29,7 +29,7 @@ owner2 = User.create({
   password_confirmation: "owner2_password",
   role: :owner
 })
-binding.irb
+
 Topping.find_or_create_by({
   name: "Pepperoni",
   owner: owner1

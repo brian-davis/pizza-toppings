@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pizzas
   devise_for :users, skip: [:registrations, :recoverable]
 
   get "home/index"
@@ -14,4 +15,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'home#index'
+
+  resources :pizza
 end

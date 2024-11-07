@@ -1,0 +1,12 @@
+<% content_for :title, "Editing pizza" %>
+
+<h1>Editing pizza</h1>
+
+<%= render "form", pizza: @pizza %>
+
+<br>
+
+<div>
+  <%= link_to "Show this pizza", @pizza %> |
+  <%= link_to "Back to pizzas", pizzas_path %>
+</div>

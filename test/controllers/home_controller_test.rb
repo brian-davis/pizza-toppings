@@ -11,7 +11,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
 
-    assert_select 'body > form[action="/users/sign_out"] > button', "Sign Out"
+    assert_select 'body > #user-header > form[action="/users/sign_out"] > button', "Sign Out"
   end
 
   test "user sees dashboard appropriate for role, chef user" do
