@@ -8,8 +8,10 @@ one:
   email: test1@example.com
   # password: password1
   # password_confirmation: password1
+  role: :chef
 
 two:
   email: test2@example.com
   # password: password2
   # password_confirmation: password2
+  role: :owner
