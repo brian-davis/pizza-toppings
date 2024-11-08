@@ -1,4 +1,6 @@
 class PizzasController < ApplicationController
+  before_action :authorize_current_user
+
   before_action :set_pizza, only: %i[ show edit update destroy ]
   before_action :set_toppings, only: [:new, :edit]
 
@@ -75,4 +77,7 @@ class PizzasController < ApplicationController
       @toppings = current_user.manager.toppings.pluck(:name, :id)
     end
 
+    def authorize_current_user
+      SimpleAuthorization.role_auth(:chef, current_user)
+    end
 end

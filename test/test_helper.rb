@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+# require_relative "../app/services/simple_authorization"
 
 module ActiveSupport
   class TestCase

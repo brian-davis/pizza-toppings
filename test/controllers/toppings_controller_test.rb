@@ -50,4 +50,11 @@ class ToppingsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to toppings_url
   end
+
+  test "user cannot navigate to page inappropriate for role" do
+    sign_in users(:chef1)
+    get new_topping_path
+    assert_response :redirect
+    assert_equal root_url, response.headers["location"]
+  end
 end

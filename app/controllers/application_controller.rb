@@ -4,4 +4,12 @@ class ApplicationController < ActionController::Base
 
   # Devise authentication
   before_action :authenticate_user!
+
+  rescue_from SimpleAuthorization::UnauthorizedError, with: :unauthorized_action
+
+  private
+
+  def unauthorized_action
+    redirect_to root_path
+  end
 end

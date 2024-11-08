@@ -51,4 +51,11 @@ class PizzasControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to pizzas_url
   end
+
+  test "user cannot navigate to page inappropriate for role" do
+    sign_in users(:owner1)
+    get new_pizza_path
+    assert_response :redirect
+    assert_equal root_url, response.headers["location"]
+  end
 end

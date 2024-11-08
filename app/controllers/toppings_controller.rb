@@ -1,4 +1,6 @@
 class ToppingsController < ApplicationController
+  before_action :authorize_current_user
+
   before_action :set_topping, only: %i[ show edit update destroy ]
 
   # GET /toppings or /toppings.json
@@ -68,5 +70,9 @@ class ToppingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def topping_params
       params.require(:topping).permit(:name)
+    end
+
+    def authorize_current_user
+      SimpleAuthorization.role_auth(:owner, current_user)
     end
 end
