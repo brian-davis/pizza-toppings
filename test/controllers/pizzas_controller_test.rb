@@ -3,7 +3,8 @@ require "test_helper"
 class PizzasControllerTest < ActionDispatch::IntegrationTest
   setup do
     @pizza = pizzas(:pizza1)
-    sign_in users(:chef1)
+    @user = users(:chef1)
+    sign_in @user
   end
 
   test "should get index" do
@@ -22,6 +23,24 @@ class PizzasControllerTest < ActionDispatch::IntegrationTest
         name: "Special #{rand(1000)}"
       } }
       post pizzas_url, params: valid_params
+    end
+
+    assert_redirected_to pizza_url(Pizza.last)
+  end
+
+  test "should create pizza with associated toppings" do
+    assert_difference("Pizza.count") do
+      new_name = "Special #{rand(1000)}"
+      valid_params = {
+        pizza: {
+          name: new_name,
+          pizza_toppings_attributes: @user.chef_toppings.pluck(:id).map.with_index { |e, i| [i.to_s, {"topping_id" => e }] }.to_h
+        }
+      }
+      post pizzas_url, params: valid_params
+      new_pizza = Pizza.last
+      assert_equal new_name, new_pizza.name
+      assert_equal @user.chef_toppings.pluck(:id).sort, new_pizza.toppings.pluck(:id).sort
     end
 
     assert_redirected_to pizza_url(Pizza.last)

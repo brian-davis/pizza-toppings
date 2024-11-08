@@ -58,4 +58,22 @@ class PizzaTest < ActiveSupport::TestCase
     })
     refute p1.valid?
   end
+
+  test "topping_list" do
+    chef = users(:chef1)
+    pizza = chef.pizzas.create(name: "Everything")
+    chef.chef_toppings.each do |t|
+      pizza.toppings << t
+    end
+    assert_equal "pepperoni and sausage", pizza.topping_list
+  end
+
+  test "build associated toppings" do
+    c1 = users(:chef1)
+    toppings = c1.chef_toppings
+    pizza = c1.pizzas.new(name: "Everything", toppings: toppings)
+    assert pizza.valid?
+    pizza.save
+    assert_equal pizza.pizza_toppings.count, toppings.count
+  end
 end

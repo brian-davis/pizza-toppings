@@ -1,7 +1,7 @@
 class PizzasController < ApplicationController
   before_action :authorize_current_user
 
-  before_action :set_pizza, only: %i[ show edit update destroy ]
+  before_action :set_pizza, only: %i[ show edit update destroy select_topping ]
   before_action :set_toppings, only: [:new, :edit]
 
   # GET /pizzas or /pizzas.json
@@ -62,6 +62,10 @@ class PizzasController < ApplicationController
     end
   end
 
+  def select_topping
+    @topping = current_user.chef_toppings.find(params[:topping_id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pizza
@@ -70,11 +74,20 @@ class PizzasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pizza_params
-      params.require(:pizza).permit(:name)
+      params.require(:pizza).permit(
+        :name,
+        pizza_toppings_attributes: [
+          :id,
+          :_destroy,
+          :topping_id
+        ],
+      )
     end
 
+    # _form select options
     def set_toppings
-      @toppings = current_user.manager.toppings.pluck(:name, :id)
+      @toppings = current_user.chef_toppings.pluck(:name, :id)
+      @toppings -= @pizza.toppings.pluck(:name, :id) if @pizza && !@pizza.new_record?
     end
 
     def authorize_current_user

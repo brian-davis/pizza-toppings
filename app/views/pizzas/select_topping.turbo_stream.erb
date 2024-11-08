@@ -1,0 +1,27 @@
+<%= form_with(model: @pizza) do |form| %>
+  <%= turbo_stream.append "pizza-form-toppings-list" do %>
+    <div class="list-item"
+        data-pizzas-target="listItem dismissableListItem"
+        data-topping-id="<%= @topping.id %>">
+      <%= form.fields_for :pizza_toppings, @pizza.pizza_toppings.build do |pt| %>
+        <%= pt.hidden_field :topping_id, value: @topping.id %>
+
+        <div class="list-item-line">
+          <b>Name:</b>
+          <%= text_field_tag(:_topping_name, @topping.name, readonly: true) %>
+        </div>
+
+        <div class="list-item-line">
+          <b></b>
+          <span class="undo-label">
+            <span class="clickable" data-action="click->pizzas#listItemDismiss">
+              <b class="danger">ⓧ</b>
+              <b class="danger">Cancel</b>
+            </span>
+          </span>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

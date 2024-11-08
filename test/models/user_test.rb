@@ -54,4 +54,15 @@ class UserTest < ActiveSupport::TestCase
 
     assert_empty c1.toppings
   end
+
+  test "chef_toppings" do
+    c1 = users(:chef1)
+    o1 = users(:owner1)
+
+    # chef role delegates to manager
+    assert_equal o1.toppings, c1.chef_toppings
+
+    # manager role n/a
+    assert_nil o1.chef_toppings
+  end
 end

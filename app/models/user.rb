@@ -12,4 +12,9 @@ class User < ApplicationRecord
 
   has_many :pizzas, inverse_of: :chef, foreign_key: :chef_id, dependent: :destroy
   has_many :toppings, inverse_of: :owner, foreign_key: :owner_id, dependent: :destroy
+
+  def chef_toppings
+    return unless role_chef?
+    manager.toppings
+  end
 end

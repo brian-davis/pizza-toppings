@@ -1,7 +1,3 @@
-Topping.destroy_all
-Pizza.destroy_all
-User.destroy_all
-
 owner1 = User.create({
   email: "owner1@example.com",
   password: "owner1_password",
@@ -33,27 +29,47 @@ chef2 = User.create({
   manager: owner2
 })
 
-Topping.find_or_create_by({
+topping1 = Topping.create({
   name: "Pepperoni",
   owner: owner1
 })
 
-Topping.find_or_create_by({
+topping2 = Topping.create({
   name: "Sausage",
   owner: owner2
 })
 
-Topping.find_or_create_by({
+topping3 = Topping.create({
   name: "Olives",
   owner: owner1
 })
 
-Pizza.find_or_create_by({
+topping4 = Topping.create({
+  name: "Tomato",
+  owner: owner1
+})
+
+topping5 = Topping.create({
+  name: "Basil",
+  owner: owner1
+})
+
+topping6 = Topping.create({
+  name: "Napoletana Cheese",
+  owner: owner2
+})
+
+pizza1 = Pizza.create({
   name: "Margherita",
   chef: chef1
 })
 
-Pizza.find_or_create_by({
+pizza1.toppings << topping4
+pizza1.toppings << topping5
+
+pizza2 = Pizza.create({
   name: "Napoletana",
-  chef: chef2
+  chef: chef2,
 })
+
+pizza2.toppings << topping6
