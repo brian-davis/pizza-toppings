@@ -3,11 +3,17 @@
 pizza1:
   name: Margherita
   chef: chef1
+  toppings:
+    - topping4
 
 pizza2:
   name: Napoletana
   chef: chef1
+  toppings:
+    - topping5
 
 pizza3:
   name: Chicago Style
   chef: chef2
+  toppings:
+    - topping2

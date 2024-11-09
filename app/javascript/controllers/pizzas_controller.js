@@ -11,7 +11,7 @@ export default class extends Controller {
   ]
 
   connect() {
-    console.log("pizzas_controller connect()");
+    // console.log("pizzas_controller connect()");
     // console.log("listItemTargets", this.listItemTargets);
   }
 
@@ -110,19 +110,22 @@ export default class extends Controller {
     event.preventDefault();
     event.stopPropagation();
 
-    console.log("selectTopping()");
+    // console.log("selectTopping()");
     const newId = event.currentTarget.value;
 
-    console.log("newId", newId);
-
-    let url = `/pizzas/${this.idValue}/select_topping`;
+    // console.log("newId", newId);
+    var url = `/select_topping`;
+    // console.log("this.idValue", this.idValue)
     if (newId && this.currentToppingIds && this.currentToppingIds.includes(Number(newId))) {
       // no-op
     } else {
       url += `?topping_id=${newId}`;
+      if (this.idValue !== "") {
+        url += `&pizza_id=${this.idValue}`;
+      }
       const successful = this.turboGet(url);
       if (successful) {
-        console.log("successful")
+        // console.log("successful")
       }
     }
     event.currentTarget.value = "";

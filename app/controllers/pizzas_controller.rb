@@ -1,8 +1,8 @@
 class PizzasController < ApplicationController
   before_action :authorize_current_user
 
-  before_action :set_pizza, only: %i[ show edit update destroy select_topping ]
-  before_action :set_toppings, only: [:new, :edit]
+  before_action :set_pizza, only: %i[ show edit update destroy ]
+  before_action :set_toppings, only: [:new, :edit, :create, :update]
 
   # GET /pizzas or /pizzas.json
   # REFACTOR: This is currently handled by home#index
@@ -27,7 +27,6 @@ class PizzasController < ApplicationController
   # POST /pizzas or /pizzas.json
   def create
     @pizza = current_user.pizzas.new(pizza_params)
-
     respond_to do |format|
       if @pizza.save
         format.html { redirect_to @pizza, notice: "Pizza was successfully created." }
@@ -63,6 +62,8 @@ class PizzasController < ApplicationController
   end
 
   def select_topping
+    @pizza = current_user.pizzas.find(params[:pizza_id]) if params[:pizza_id]
+    @pizza ||= current_user.pizzas.new
     @topping = current_user.chef_toppings.find(params[:topping_id])
   end
 

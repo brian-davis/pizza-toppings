@@ -65,7 +65,7 @@ class PizzaTest < ActiveSupport::TestCase
     chef.chef_toppings.each do |t|
       pizza.toppings << t
     end
-    assert_equal "pepperoni and sausage", pizza.topping_list
+    assert_equal"pepperoni, sausage, special cheese, and tomato", pizza.topping_list
   end
 
   test "build associated toppings" do
@@ -75,5 +75,64 @@ class PizzaTest < ActiveSupport::TestCase
     assert pizza.valid?
     pizza.save
     assert_equal pizza.pizza_toppings.count, toppings.count
+  end
+
+  test "cannot build pizza with duplicate toppings" do
+    c1 = users(:chef1)
+    toppings = c1.chef_toppings
+    pizza = c1.pizzas.create(name: "New Pizza 1", toppings: toppings)
+    pizza2 = c1.pizzas.new(name: "New Pizza 2", toppings: toppings)
+    refute pizza2.valid?
+    expected = "A pizza already exists with these toppings."
+    assert_equal expected, pizza2.errors.full_messages.to_sentence
+  end
+
+  test "cannot build pizza with duplicate toppings, empty toppings special case" do
+    c1 = users(:chef1)
+    pizza = c1.pizzas.create(name: "New Pizza 1")
+
+    # The first 'no toppings' pizza is ok.
+    assert pizza.valid?
+    assert_empty pizza.toppings
+
+    # The next 'no toppings' pizza is a duplicate.
+    pizza2 = c1.pizzas.new(name: "New Pizza 2")
+    refute pizza2.valid?
+    expected = "A pizza already exists with these toppings."
+    assert_equal expected, pizza2.errors.full_messages.to_sentence
+  end
+
+  test "cannot build pizza with duplicate toppings, marked_for_destruction special case" do
+    c1 = users(:chef1)
+    pizza1 = pizzas(:pizza1) # chef1, topping4
+    t4 = toppings(:topping4)
+    t5 = toppings(:topping5)
+    assert t4.in?(pizza1.toppings)
+    refute t5.in?(pizza1.toppings)
+
+    # build a similar pizza, with more toppings
+    pizza2 = c1.pizzas.create(name: "edge case", toppings:[
+      t4, t5
+    ])
+    assert pizza2.valid?
+    assert t4.in?(pizza2.toppings)
+    assert t5.in?(pizza2.toppings)
+
+    # Update, to remove the extra topping, so that the only remaining topping is a duplicate
+    params = ActionController::Parameters.new({
+      pizza: {
+        pizza_toppings_attributes: {
+          "0" => {
+            "id" => pizza2.pizza_toppings.find_by(topping_id: t4.id).id,
+            "_destroy" => "0"
+          },
+          "1" => {
+            "id" => pizza2.pizza_toppings.find_by(topping_id: t5.id).id,
+            "_destroy" => "1"
+          }
+        }
+      }
+    }).require(:pizza).permit(:id, :name, pizza_toppings_attributes: [:id, :_destroy])
+    refute pizza2.update(params)
   end
 end

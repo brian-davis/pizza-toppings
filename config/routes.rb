@@ -17,11 +17,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'home#index'
 
-  resources :pizzas do
-    member do
-      get :select_topping, format: :turbo_stream
-    end
-  end
+  resources :pizza
+  resources :topping
 
-  resources :toppings
+  get :select_topping, to: "pizzas_turbo#select_topping", format: :turbo_stream
 end
