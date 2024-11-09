@@ -4,13 +4,12 @@
 
 <h1>Pizzas</h1>
 
-<div id="pizzas">
+<div id="pizzas" class="list">
   <% @pizzas.each do |pizza| %>
     <%= render pizza %>
-    <p>
-      <%= link_to "Show this pizza", pizza %>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "New pizza", new_pizza_path %>
+<%= link_to(new_pizza_path) do %>
+  <button>New Pizza</button>
+<% end %>

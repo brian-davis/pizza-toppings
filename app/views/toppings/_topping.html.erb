@@ -1,3 +1,6 @@
 <div class="topping list-item" id="<%= dom_id(topping) %>">
-  <%= link_to topping.name.titleize, topping %>
+  <span class="list-item-section">
+    <%= topping.name.titleize %>
+  </span>
+  <span class="list-item-section"><%= link_to "👉", topping, class: "show-link" %></span>
 </div>

@@ -6,8 +6,7 @@ class ToppingsController < ApplicationController
   # GET /toppings or /toppings.json
   # REFACTOR: This is currently handled by home#index
   def index
-    # @toppings = current_user.toppings.all
-    redirect_to root_path
+    @toppings = current_user.toppings.all.order(:name)
   end
 
   # GET /toppings/1 or /toppings/1.json

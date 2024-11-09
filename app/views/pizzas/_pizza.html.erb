@@ -1,3 +1,5 @@
 <div class="pizza list-item" id="<%= dom_id(pizza) %>">
-  <%= link_to pizza.name.titleize, pizza %>
+  <span class="list-item-section"><b><%= pizza.name.titleize %></b></span>
+  <span class="list-item-section"><%= pizza.topping_list %></span>
+  <span class="list-item-section"><%= link_to "👉", pizza, class: "show-link" %></span>
 </div>

@@ -30,8 +30,13 @@ body {
   padding: 0.25rem;
 }
 
+
 .list .list-item:nth-of-type(odd) {
   background-color: beige;
+}
+
+.list .list-item .list-item-section{
+  margin-right: 1rem;
 }
 
 #user-header {
@@ -57,4 +62,8 @@ body {
 
 form.button_to {
   display:unset;
+}
+
+a.show-link {
+  text-decoration: none;
 }

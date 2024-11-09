@@ -4,13 +4,12 @@
 
 <h1>Toppings</h1>
 
-<div id="toppings">
+<div id="toppings" class="list">
   <% @toppings.each do |topping| %>
     <%= render topping %>
-    <p>
-      <%= link_to "Show this topping", topping %>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "New topping", new_topping_path %>
+<%= link_to(new_topping_path) do %>
+  <button>New Topping</button>
+<% end %>

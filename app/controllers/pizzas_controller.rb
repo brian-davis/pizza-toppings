@@ -7,8 +7,7 @@ class PizzasController < ApplicationController
   # GET /pizzas or /pizzas.json
   # REFACTOR: This is currently handled by home#index
   def index
-    # @pizzas = current_user.pizzas.all
-    redirect_to root_path
+    @pizzas = current_user.pizzas.all.order(:name)
   end
 
   # GET /pizzas/1 or /pizzas/1.json

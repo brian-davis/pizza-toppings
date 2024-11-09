@@ -1,13 +1,1 @@
-<h2 class="dashboard-items-header">
-  Toppings
-</h2>
-
-<div class="list">
-  <% @dashboard_items.each do |item| %>
-    <%= render(item) %>
-  <% end %>
-</div>
-
-<%= link_to(new_topping_path) do %>
-  <button>New Topping</button>
-<% end %>
+<%= link_to("Manage Toppings", toppings_path) %>
