@@ -1,4 +1,4 @@
-<%= form_with(model: topping) do |form| %>
+<%= form_with(model: topping, class: "resource-form") do |form| %>
   <% if topping.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(topping.errors.count, "error") %> prohibited this topping from being saved:</h2>

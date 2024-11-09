@@ -30,7 +30,6 @@ body {
   padding: 0.25rem;
 }
 
-
 .list .list-item:nth-of-type(odd) {
   background-color: beige;
 }

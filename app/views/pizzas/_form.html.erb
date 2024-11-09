@@ -4,7 +4,8 @@ form_with(
   data: {
     controller: "pizzas",
     pizzas_id_value: @pizza.id
-  }
+  },
+  class: "resource-form"
 ) do |form|
 %>
   <% if pizza.errors.any? %>
@@ -23,8 +24,10 @@ form_with(
     <div class="form-fields">
       <%= form.label :name %>
       <%= form.text_field :name %>
+    </div>
 
-      <div>
+    <hr>
+      <div class="form-fields">
         <%= form.label :available_toppings %>
         <%=
           select_tag(
@@ -39,33 +42,30 @@ form_with(
           )
         %>
       </div>
+    <div id="pizza-form-toppings-list" class="list">
+      <% pizza.pizza_toppings.each do |pizza_topping| %>
+        <div class="list-item"
+              data-pizzas-target="listItem"
+              data-topping-id="<%= pizza_topping.topping_id %>">
+          <%= form.fields_for :pizza_toppings, pizza_topping do |pt| %>
+            <%= pt.hidden_field :id %>
+            <%= pt.hidden_field :topping_id %>
 
-      <div id="pizza-form-toppings-list">
-        <%= form.label :toppings %>
-        <% pizza.pizza_toppings.each do |pizza_topping| %>
-          <div class="list-item"
-               data-pizzas-target="listItem"
-               data-topping-id="<%= pizza_topping.topping_id %>">
-            <%= form.fields_for :pizza_toppings, pizza_topping do |pt| %>
-              <%= pt.hidden_field :id %>
-              <%= pt.hidden_field :topping_id %>
+            <div class="list-item-line form-fields">
+              <b>Name:</b>
+              <%= text_field_tag(:_topping_name, pizza_topping.topping.name, readonly: true) %>
+            </div>
 
-              <div class="list-item-line">
-                <b>Name:</b>
-                <%= text_field_tag(:_topping_name, pizza_topping.topping.name, readonly: true) %>
-              </div>
-
-              <div class="list-item-line">
-                <b></b>
-                <span class="undo-label">
-                  <%= pt.check_box :_destroy %>
-                  <b class="danger">Remove</b>
-                </span>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+            <div class="list-item-line form-fields">
+              <b></b>
+              <span class="undo-label">
+                <%= pt.check_box :_destroy %>
+                <b class="danger">Remove</b>
+              </span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <div class="submit-button-wrapper">

@@ -1,0 +1,40 @@
+form.new_user,
+form.resource-form {
+  line-height: 2rem;
+  border: 2px solid #777;
+  padding: 1rem;
+  max-width: 30%;
+}
+
+form.resource-form .submit-button-wrapper {
+  text-align: right;
+}
+
+form.resource-form .form-fields {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+form.resource-form .form-fields label,
+form.resource-form .form-fields b,
+form.resource-form .form-fields input {
+  flex-grow: 1;
+}
+
+form.resource-form .form-fields label,
+form.resource-form .form-fields b {
+  text-align: end;
+}
+
+form.resource-form .form-fields input {
+  text-align: start;
+}
+
+#pizza-form-toppings-list b {
+  font-weight: normal;
+}
+
+#pizza-form-toppings-list .list-item {
+  padding: 1rem;
+}
