@@ -13,7 +13,6 @@ chef1 = User.create({
   manager: owner1
 })
 
-
 owner2 = User.create({
   email: "owner2@example.com",
   password: "owner2_password",

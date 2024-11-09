@@ -8,6 +8,14 @@ This is application has been built with Ruby 3.3 and Rails 7.2.2.  It is configu
 
 The [Devise gem](https://github.com/heartcombo/devise) is used for authentication.  Because this is a demo app and will be deployed temporarily, and without using a mailer in production, the registration and recovery modules have been disabled.  You will not be able to create users (except in the rails console in development mode).  You will be able to test the user roles as owner or chef using the pre-made users defined in db/seeds.rb:
 
-chef1@example.com/chef1_password
+email:`chef1@example.com`
+password:`chef1_password`
 
-owner1@example.com/owner1_password
+email:`owner1@example.com`
+password:`owner1_password`
+
+email:`chef2@example.com`
+password:`chef2_password`
+
+email:`owner2@example.com`
+password:`owner2_password`
