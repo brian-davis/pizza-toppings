@@ -1,6 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @topping %>
+<h4><%= @topping.name %></h4>
+<p>
+  Used in pizzas: <%= @topping.pizza_list %>
+</p>
 
 <div>
   <%= link_to "Edit this topping", edit_topping_path(@topping) %> |

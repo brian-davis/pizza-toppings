@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "employees/index"
+  get "employees/show"
+  get "users/show"
   resources :toppings
   resources :pizzas
   devise_for :users, skip: [:registrations, :recoverable]
@@ -19,6 +22,8 @@ Rails.application.routes.draw do
 
   resources :pizza
   resources :topping
+
+  resources :employees, only: [:index, :show]
 
   get :select_topping, to: "pizzas_turbo#select_topping", format: :turbo_stream
 end

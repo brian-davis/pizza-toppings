@@ -1,1 +1,10 @@
+<p>
+  Your role is: <%= current_user.role.titleize %>
+</p>
+
+<p>
+  Your manager is:
+  <%= current_user.manager.email %>
+</p>
+
 <%= link_to("Manage Pizzas", pizzas_path) %>

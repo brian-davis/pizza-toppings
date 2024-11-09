@@ -1,1 +1,11 @@
-<%= link_to("Manage Toppings", toppings_path) %>
+<p>
+  Your role is: <%= current_user.role.titleize %>
+</p>
+
+<p>
+  <%= link_to("Employees", employees_path) %>
+</p>
+
+<p>
+  <%= link_to("Manage Toppings", toppings_path) %>
+</p>

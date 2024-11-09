@@ -1,0 +1,12 @@
+<h3>Employees</h3>
+
+<div id="employees" class="list">
+  <% current_user.employees.each do |employee| %>
+    <div class="list-item">
+      <div class="employee list-item" id="<%= dom_id(employee) %>">
+        <span class="list-item-section"><%= employee.email %></span>
+        <span class="list-item-section"><%= link_to "👉", employee_path(employee), class: "show-link" %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

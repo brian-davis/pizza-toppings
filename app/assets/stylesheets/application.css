@@ -64,6 +64,10 @@ form.button_to {
   display:unset;
 }
 
+a {
+  color: crimson;
+}
+
 a.show-link {
   text-decoration: none;
 }

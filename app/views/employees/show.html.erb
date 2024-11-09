@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+<p class="employee-email">
+  <%= @employee.email %>
+</p>
+
+<h3>Pizzas</h3>
+
+<div id="pizzas" class="list">
+  <% @employee.pizzas.each do |pizza| %>
+    <div class="pizza list-item" id="<%= dom_id(pizza) %>">
+      <span class="list-item-section"><b><%= pizza.name.titleize %></b></span>
+      <span class="list-item-section"><%= pizza.topping_list %></span>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <%= link_to "Back to employees", employees_path %>
+</div>

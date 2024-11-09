@@ -16,3 +16,4 @@ chef1:
 chef2:
   email: chef2@example.com
   role: chef
+  manager: owner2

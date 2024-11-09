@@ -8,8 +8,28 @@ class PizzasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get pizzas_url
-    assert_response :redirect # REFACTOR: currently handled by home#index
+    sign_in users(:chef1)
+    get pizzas_path
+    assert_response :success
+
+    expected_item1 = pizzas(:pizza1) # build fixture
+    expected_item2 = pizzas(:pizza2) # build fixture
+
+    assert_select "h3", "Pizzas"
+    assert_select "div.list"
+    assert_select "div.list-item#pizza_#{expected_item1.id}"
+    assert_select "div.list-item#pizza_#{expected_item2.id}"
+  end
+
+  test "user sees user-scoped dashboard items, chef user" do
+    # user-scoping
+    sign_in users(:chef2)
+
+    user2_expected_item = pizzas(:pizza3) # build fixture, scoped to chef2
+    get pizzas_path
+    assert_response :success
+
+    assert_select "div.list-item#pizza_#{user2_expected_item.id}"
   end
 
   test "should get new" do

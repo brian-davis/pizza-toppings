@@ -7,8 +7,17 @@ class ToppingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get toppings_url
-    assert_response :redirect # REFACTOR
+    sign_in users(:owner1)
+    get toppings_path
+    assert_response :success
+
+    expected_item1 = toppings(:topping1) # build fixture
+    expected_item2 = toppings(:topping2) # build fixture
+
+    assert_select "h3", "Toppings"
+    assert_select "div.list"
+    assert_select "div.list-item#topping_#{expected_item1.id}"
+    assert_select "div.list-item#topping_#{expected_item2.id}"
   end
 
   test "should get new" do

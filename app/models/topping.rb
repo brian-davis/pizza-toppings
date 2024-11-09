@@ -7,6 +7,10 @@ class Topping < ApplicationRecord
   has_many :pizza_toppings, dependent: :destroy
   has_many :pizzas, through: :pizza_toppings
 
+  def pizza_list
+    pizzas.pluck(:name).sort.to_sentence
+  end
+
   private
 
   def owner_role
