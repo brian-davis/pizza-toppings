@@ -19,3 +19,5 @@ password:`chef2_password`
 
 email:`owner2@example.com`
 password:`owner2_password`
+
+The deployed production app is available [here](https://sleepy-lake-10238-75aee12a7274.herokuapp.com/).
