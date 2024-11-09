@@ -1,0 +1,28 @@
+<div id="user-header">
+  <div class="user-header-section">
+    Signed in as: <%= current_user.email %>
+  </div>
+
+  <div class="user-header-section">
+    Role: <%= current_user.role.titleize %>
+  </div>
+
+  <div class="user-header-section">
+    <%# TODO %>
+    <%= link_to("Organization", root_path) %>
+  </div>
+
+  <div class="user-header-section">
+    <%= link_to("Home", root_path) %>
+  </div>
+
+  <div class="user-header-section">
+    <%=
+      button_to(
+      "Sign Out",
+      destroy_user_session_path,
+      method: :delete
+      )
+    %>
+  </div>
+</div>

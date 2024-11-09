@@ -2,11 +2,12 @@
   Pizzas
 </h2>
 
-<div class="dashboard-items-list">
+<div class="list">
   <% @dashboard_items.each do |item| %>
     <%= render(item) %>
   <% end %>
 </div>
 
-<hr>
-<%= link_to("New Pizza", new_pizza_path) %>
+<%= link_to(new_pizza_path) do %>
+  <button>New Pizza</button>
+<% end %>

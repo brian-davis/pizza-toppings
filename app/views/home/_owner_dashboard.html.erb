@@ -2,11 +2,12 @@
   Toppings
 </h2>
 
-<div class="dashboard-items-list">
+<div class="list">
   <% @dashboard_items.each do |item| %>
     <%= render(item) %>
   <% end %>
 </div>
 
-<hr>
-<%= link_to("New Topping", new_topping_path) %>
+<%= link_to(new_topping_path) do %>
+  <button>New Topping</button>
+<% end %>

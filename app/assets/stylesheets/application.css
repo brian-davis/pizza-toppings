@@ -13,3 +13,48 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #333;
+}
+
+.list {
+  line-height: 1.5rem;
+  padding: 0.5rem;
+  border: 2px solid beige;
+  margin-bottom: 0.5rem;
+}
+
+.list .list-item {
+  padding: 0.25rem;
+}
+
+.list .list-item:nth-of-type(odd) {
+  background-color: beige;
+}
+
+#user-header {
+  background-color: beige;
+  padding: 0.5rem;
+  color: #777;
+  display: flex;
+}
+
+.user-header-section {
+  display: inline;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.user-header-section:last-of-type {
+  text-align: end;
+}
+
+.user-header-section:first-of-type {
+  text-align: start;
+}
+
+form.button_to {
+  display:unset;
+}

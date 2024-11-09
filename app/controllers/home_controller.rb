@@ -14,9 +14,9 @@ class HomeController < ApplicationController
   def set_dashboard_items
     @dashboard_items = case current_user.role
     when "owner"
-      current_user.toppings.all
+      current_user.toppings.all.order(:name)
     when "chef"
-      current_user.pizzas.all
+      current_user.pizzas.all.order(:name)
     end
   end
 end

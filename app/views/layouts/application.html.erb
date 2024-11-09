@@ -26,16 +26,7 @@
     <% end %>
 
     <% if user_signed_in? %>
-      <div id="user-header">
-        Signed in as: <%= current_user.email %>
-        <%=
-          button_to(
-            "Sign Out",
-          destroy_user_session_path,
-          method: :delete
-          )
-        %>
-      </div>
+      <%= render("shared/user_header") %>
     <% end %>
 
     <%= yield %>
